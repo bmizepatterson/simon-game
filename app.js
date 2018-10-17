@@ -4,6 +4,8 @@ new Vue ({
 
 
   data: {
+    buttons: ["red", "yellow", "green", "blue"],
+    currentButton: '',
     gameInProgress: false,
     blueFlash: false,
     greenFlash: false,

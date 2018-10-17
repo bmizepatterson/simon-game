@@ -1,50 +1,40 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link rel="stylesheet" href="style.css" type="text/css">
-
     <title>Simon</title>
-  </head>
+</head>
 
-  <body>
+<body>
 
-  <div id="gameboard" v-cloak>
-    <div v-on:click="start" id="startbutton">
-    SIMON
-      <div v-if="!gameInProgress">click to play</div>
+    <div id="gameboard" v-cloak>
+
+        <table>
+            <tr>
+                <td v-on:click="button('red')"  v-bind:class="{ flash: currentButton }" class="red-button" ></td>
+                <td v-on:click="button('yellow')" v-bind:class="{ flash: currentButton }" class="yellow-button" ></td>
+            </tr>
+            <tr>
+                <td v-on:click="button('green')" v-bind:class="{ flash: currentButton }" class="green-button"></td>
+                <td v-on:click="button('blue')" v-bind:class="{ flash: currentButton }" class="blue-button"></td>
+            </tr>
+        </table>
+
+        <div v-on:click="start" id="startbutton">SIMON
+            <div v-if="!gameInProgress">click to play</div>
+        </div>
+
+        <p id="level">Level: {{ computerSequence.length }}</p>
+
+        <p id="timer" v-if="timerActive">{{ displayTimer }}</p>
+
+        <p v-if="gameLost" id="message">You lose. 😱</p>
     </div>
 
-    <table>
-      <tr>
-        <td v-on:click="button('red')"  v-bind:class="{redFlashBackground: redFlash}" id="red" ></td>
-        <td v-on:click="button('yellow')" v-bind:class="{yellowFlashBackground: yellowFlash}" id="yellow" ></td>
-      </tr>
-      <tr>
-        <td v-on:click="button('green')" v-bind:class="{greenFlashBackground: greenFlash}" id="green"></td>
-        <td v-on:click="button('blue')" v-bind:class="{blueFlashBackground: blueFlash}" id="blue"></td>
-      </tr>
-    </table>
 
-    <p id="level">Level: {{ computerSequence.length }}</p> 
-
-    <p id="timer" v-if="timerActive">{{ displayTimer }}</p>
-
-    <p v-if="gameLost" id="message">You lose. 😱</p>
-  </div>
-
-
-
-
-
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="app.js"></script>
-  </div>
-  </body>
+</body>
 </html>

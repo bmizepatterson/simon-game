@@ -6,29 +6,36 @@ body {
   font-family: 'Press Start 2P', Helvetica, Arial, sans-serif;
 }
 
-#red {
-  background-color: #b50000;
-  width: 50%;
-  border-radius: 100% 0 0 0;
-
+.red-button, .blue-button, .yellow-button, .green-button {
+    opacity: 0.5;
+    width: 50%;
 }
 
-#yellow {
-  background-color: #ccc804;
-  border-radius: 0 100% 0 0;
-
+.red-button.red,
+.blue-button.blue,
+.yellow-button.yellow,
+.green-button.green {
+    opacity: 1;
 }
 
-#green {
-  background-color: #008e02;
-  border-radius: 0 0 0 100%;
-
-
+.red-button {
+    background-color: red;
+    border-radius: 100% 0 0 0;
 }
 
-#blue {
-  background-color: #0007ea;
-  border-radius: 0 0 100% 0;
+.yellow-button {
+    background-color: yellow;
+    border-radius: 0 100% 0 0;
+}
+
+.green-button {
+    background-color: green;
+    border-radius: 0 0 0 100%;
+}
+
+.blue-button {
+    background-color: blue;
+    border-radius: 0 0 100% 0;
 }
 
 table {
