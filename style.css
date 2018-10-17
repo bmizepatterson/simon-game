@@ -4,6 +4,11 @@ body {
   background: black;
   color: white;
   font-family: 'Press Start 2P', Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+
+[v-cloak] {
+  display:none;
 }
 
 .red-button, .blue-button, .yellow-button, .green-button {
@@ -39,90 +44,52 @@ body {
 }
 
 table {
-  width: 500px;
-  height: 500px;
-  margin: auto;
-  border-radius: 20px;
-  margin: 50px 0;
+    width: 500px;
+    height: 500px;
+    margin: auto;
+    border-radius: 20px;
+    margin: 50px 0;
 }
 
 td {
-  border: 2px solid black;
+    border: 2px solid black;
 }
 
 #gameboard {
-  position: relative;
-  width: 500px;
-  margin: auto;
-
+    position: relative;
+    width: 500px;
+    margin: auto;
 }
 
 #startbutton {
-  font-family: 'Press Start 2P', Helvetica, Arial, sans-serif;
-  position: absolute;
-  width: 250px;
-  height: 250px;
-  top: 125px;
-  left: 125px;
-  border-radius: 100%;
-  background-color: black;
-  color: white;
-  text-align: center;
-  line-height: 250px;
-  cursor: default;
-  font-weight: bold;
-  font-size: 40px;
-  overflow: hidden;
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    top: 125px;
+    left: 125px;
+    border-radius: 100%;
+    background-color: black;
+    color: white;
+    line-height: 250px;
+    cursor: default;
+    font-weight: bold;
+    font-size: 40px;
+    overflow: hidden;
 }
 
 #startbutton:active {
-  background-color: grey;
+    background-color: grey;
 }
 
 #startbutton div {
-  position: relative;
-  top: -90px;
-  line-height: initial;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+    position: relative;
+    top: -90px;
+    line-height: initial;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1rem;
 }
 
-
-#red.redFlashBackground {
-
-  background-color: #ff3d3d;
-}
-
-#green.greenFlashBackground {
-
-  background-color: #59ff67;
-}
-
-#yellow.yellowFlashBackground {
-  background-color: #fffc7a;
-
-}
-
-#blue.blueFlashBackground {
-  background-color: #93cdff;
-}
-
-#timer, #message {
-  font-size: 40px;
-  text-align: center;
-  margin: 0;
-}
-
-[v-cloak] {
-  display:none;
-}
-
-h1 {
-  text-align: center;
-  font-family: 'Press Start 2P', Helvetica, Arial, sans-serif;
-  margin-top: 50px;
-}
-
-#level {
-  text-align: center;
+.game-message {
+    font-size: 40px;
+    margin: 0;
 }

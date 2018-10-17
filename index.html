@@ -13,12 +13,12 @@
 
         <table>
             <tr>
-                <td v-on:click="button('red')"  v-bind:class="{ flash: currentButton }" class="red-button" ></td>
-                <td v-on:click="button('yellow')" v-bind:class="{ flash: currentButton }" class="yellow-button" ></td>
+                <td v-on:click="button('red')"  v-bind:class="currentColor" class="red-button" ></td>
+                <td v-on:click="button('yellow')" v-bind:class="currentColor" class="yellow-button" ></td>
             </tr>
             <tr>
-                <td v-on:click="button('green')" v-bind:class="{ flash: currentButton }" class="green-button"></td>
-                <td v-on:click="button('blue')" v-bind:class="{ flash: currentButton }" class="blue-button"></td>
+                <td v-on:click="button('green')" v-bind:class="currentColor" class="green-button"></td>
+                <td v-on:click="button('blue')" v-bind:class="currentColor" class="blue-button"></td>
             </tr>
         </table>
 
@@ -26,11 +26,11 @@
             <div v-if="!gameInProgress">click to play</div>
         </div>
 
-        <p id="level">Level: {{ computerSequence.length }}</p>
+        <p>Level: {{ sequence.length }}</p>
 
-        <p id="timer" v-if="timerActive">{{ displayTimer }}</p>
+        <p v-if="timerActive">{{ displayTimer }}</p>
 
-        <p v-if="gameLost" id="message">You lose. 😱</p>
+        <p v-if="gameLost">Game Over</p>
     </div>
 
 

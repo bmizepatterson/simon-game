@@ -1,176 +1,146 @@
-new Vue ({
+Vue.component('game-timer', {
 
-  el: '#gameboard',
+    template: '<div class="game-message">{{ this.message }}{{ this.timer }}</div>',
 
-
-  data: {
-    buttons: ["red", "yellow", "green", "blue"],
-    currentButton: '',
-    gameInProgress: false,
-    blueFlash: false,
-    greenFlash: false,
-    yellowFlash: false,
-    redFlash: false,
-    computerSequence: [],
-    computerInterval: null,
-    currentIndex: 0,
-    gameLost: false,
-    timer: null,
-    displayTimer: 3,
-    timerActive: false,
-    playerTurn: false
-  },
-
-  methods: {
-    start: function () {
-      clearInterval(this.timer);
-      clearInterval(this.computerInterval);
-      this.gameInProgress = true;
-      this.displayTimer = 3;
-      this.computerSequence = [];
-      this.gameLost = false;
-      this.computerPlay();
-
-    },
-
-    computerPlay: function () {
-
-      this.currentIndex = 0;
-      let randomColor = this.getRandomColor();
-      this.computerSequence.push(randomColor);
-
-      let vue = this;
-      this.computerInterval = setInterval(function() {
-
-        if (vue.currentIndex < vue.computerSequence.length) {
-
-          vue.flashOn(vue.computerSequence[vue.currentIndex]);
-          vue.currentIndex++;
-          setTimeout(function() {
-            vue.flashOff();
-
-          }, 500);
-
-        } else {
-            vue.playerTurn = true;
-            vue.currentIndex = 0;
-            vue.startCountdown();
-            clearInterval(vue.computerInterval);
-
-          }
-      }, 1000);
-
-
-
-    },
-
-    startCountdown: function () {
-      let vue = this
-      this.timerActive = true;
-      this.displayTimer = 3;
-
-      this.timer = setInterval(function() {
-        if (vue.displayTimer > 1){
-
-          vue.displayTimer -= 1
-
-        } else {
-          vue.timerActive = false;
-          clearInterval(vue.timer);
-          vue.youLose();
+    data: function() {
+        return {
+            message: '',
+            timer: ''
         }
-      }, 1000 );
-
-
-    },
-
-    youLose: function() {
-
-      this.gameLost = true;
-      this.gameInProgress = false;
-      this.currentIndex = 0;
-      this.computerSequence = [];
-
-    },
-
-    button: function (color) {
-      if (!this.gameInProgress || !this.playerTurn) return;
-
-      this.timerActive = false;
-
-      clearInterval(this.timer);
-      let vue = this;
-
-      this.flashOn(color);
-      this.playerTurn = false;
-      setTimeout(function() {
-
-        vue.flashOff();
-        vue.playerTurn = true;
-
-        if (color == vue.computerSequence[vue.currentIndex]) {
-
-          if (vue.currentIndex == vue.computerSequence.length - 1) {
-            vue.playerTurn = false;
-            vue.computerPlay();
-
-          } else {
-            vue.startCountdown();
-            vue.currentIndex++;
-
-          }
-
-        } else {
-          vue.youLose();
-
-        }
-
-      }, 500);
-
-
-
-    },
-
-    flashOn: function (color) {
-      if (color == 'green'){
-        this.greenFlash = true;
-      }else if (color == 'red'){
-        this.redFlash = true;
-      }else if (color == 'blue'){
-        this.blueFlash = true;
-      }else if (color == 'yellow'){
-        this.yellowFlash = true;
-      }
-
-
-
-    },
-
-    flashOff: function () {
-
-      this.greenFlash = false;
-      this.redFlash = false;
-      this.blueFlash = false;
-      this.yellowFlash = false;
-
-    },
-
-    getRandomColor: function() {
-      let random = Math.ceil(Math.random() * 4);
-
-      if (random == 1) {
-        return 'red';
-      }
-      if (random == 2) {
-        return 'blue';
-      }
-      if (random == 3) {
-        return 'green';
-      }
-      if (random == 4) {
-        return 'yellow';
-      }
     }
+});
 
-  }
-})
+new Vue({
+
+    el: '#gameboard',
+
+
+    data: {
+        colors: ["red", "yellow", "green", "blue"],
+        currentColor: '',
+        sequence: [],
+        currentIndex: 0,
+
+
+        gameInProgress: false,
+        computerInterval: null,
+
+        gameLost: false,
+        timer: null,
+        displayTimer: 3,
+        timerActive: false,
+        playerTurn: false
+    },
+
+    methods: {
+        start: function() {
+
+            clearInterval(this.timer);
+            clearInterval(this.computerInterval);
+            this.gameInProgress = true;
+            this.displayTimer = 3;
+            this.sequence = [];
+            this.gameLost = false;
+            this.playSequence();
+
+        },
+
+        playSequence: function() {
+            let self = this;
+
+            self.currentIndex = 0;
+            self.addToSequence();
+
+            self.computerInterval = setInterval(function() {
+
+                if (self.currentIndex < self.sequence.length) {
+
+                    self.currentColor = self.sequence[self.currentIndex];
+                    self.currentIndex++;
+
+                    setTimeout(() => { self.currentColor = ''; }, 500);
+
+                } else {
+
+                    self.playerTurn = true;
+                    self.currentIndex = 0;
+                    self.startCountdown();
+                    clearInterval(self.computerInterval);
+
+                }
+            }, 1000);
+
+        },
+
+        startCountdown: function () {
+            let self = this;
+
+            self.timerActive = true;
+            self.displayTimer = 3;
+
+            self.timer = setInterval(function() {
+                if (self.displayTimer > 1){
+
+                    self.displayTimer -= 1
+
+                } else {
+                    self.timerActive = false;
+                    clearInterval(self.timer);
+                    self.gameOver();
+                }
+            }, 1000);
+
+        },
+
+        gameOver: function() {
+
+            this.gameLost = true;
+            this.gameInProgress = false;
+            this.currentIndex = 0;
+            this.sequence = [];
+
+        },
+
+        button: function (color) {
+            if (!this.gameInProgress || !this.playerTurn) return;
+
+            let self = this;
+            self.timerActive = false;
+
+            clearInterval(self.timer);
+
+            self.currentColor = color;
+            self.playerTurn = false;
+
+            setTimeout(function() {
+
+                self.currentColor = '';
+                self.playerTurn = true;
+
+                if (color == self.sequence[self.currentIndex]) {
+
+                    if (self.currentIndex == self.sequence.length - 1) {
+                        self.playerTurn = false;
+                        self.playSequence();
+
+                    } else {
+                        self.startCountdown();
+                        self.currentIndex++;
+
+                    }
+
+                } else {
+                    self.gameOver();
+
+                }
+
+            }, 500);
+
+        },
+
+        addToSequence: function() {
+            let random = Math.floor(Math.random() * 4);
+            this.sequence.push(this.colors[random]);
+        }
+    }
+});
