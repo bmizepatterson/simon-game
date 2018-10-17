@@ -22,15 +22,13 @@
             </tr>
         </table>
 
-        <div v-on:click="start" id="startbutton">SIMON
-            <div v-if="!gameInProgress">click to play</div>
-        </div>
+        <div v-on:click="start" id="startbutton">SIMON<div v-if="!gameInProgress">push to start</div></div>
 
-        <p>Level: {{ sequence.length }}</p>
+        <p v-if="highScore" :class="{ highlight: newHighScore }">High Score: {{ highScore }}</p>
+        <p v-if="sequence.length">Level {{ sequence.length }}</p>
 
-        <p v-if="timerActive">{{ displayTimer }}</p>
+        <game-timer></game-timer>
 
-        <p v-if="gameLost">Game Over</p>
     </div>
 
 

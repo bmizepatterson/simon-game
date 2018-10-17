@@ -7,6 +7,18 @@ body {
   text-align: center;
 }
 
+table {
+    width: 500px;
+    height: 500px;
+    margin: auto;
+    border-radius: 20px;
+    margin: 2rem 0;
+}
+
+td {
+    border: 2px solid black;
+}
+
 [v-cloak] {
   display:none;
 }
@@ -41,18 +53,6 @@ body {
 .blue-button {
     background-color: blue;
     border-radius: 0 0 100% 0;
-}
-
-table {
-    width: 500px;
-    height: 500px;
-    margin: auto;
-    border-radius: 20px;
-    margin: 50px 0;
-}
-
-td {
-    border: 2px solid black;
 }
 
 #gameboard {
@@ -92,4 +92,8 @@ td {
 .game-message {
     font-size: 40px;
     margin: 0;
+}
+
+.highlight {
+    color: yellow;
 }
